@@ -169,3 +169,9 @@ Packages/packages-lock.json linguist-generated
 
 # Exceptions for .asset files such as lightning pre-baking
 LightingData.asset     binary
+
+# Los identificadores de UGS no entran en el repo (ver Tools/scrub-ugs-ids.sh)
+ProjectSettings/ProjectSettings.asset filter=ugs-ids
+
+# Los scripts de shell deben mantener LF: con CRLF, sh falla con ": command not found"
+*.sh text eol=lf
