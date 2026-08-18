@@ -105,3 +105,10 @@ InitTestScene*.unity*
 
 # Auto-generated scenes by play mode tests
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
+
+# Servidor MCP de Unity local, desactivado a favor del global (ver ~/.claude.json)
+.mcp.json.disabled
+
+# Fuentes editables del pack de GUI (PSD/SVG, ~667 MB): se rebajan del Asset Store
+Assets/GUIPackCartoon/Sources/
+Assets/GUIPackCartoon/Sources.meta
