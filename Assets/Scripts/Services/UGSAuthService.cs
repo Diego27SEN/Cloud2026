@@ -17,6 +17,9 @@ namespace Cloud2026.Services
         public event Action OnSignedOut;
         public event Action<string> OnSignInFailed;
 
+        /// <summary>Se dispara al vincular credenciales a la sesión en curso.</summary>
+        public event Action<string> OnAccountLinked;
+
         [Header("Configuración")]
         [Tooltip("Si es true, intenta inicializar Unity Services automáticamente en Awake.")]
         [SerializeField] private bool initializeOnAwake = true;
@@ -31,6 +34,18 @@ namespace Cloud2026.Services
         public bool IsSignedIn => IsInitialized && AuthenticationService.Instance.IsSignedIn;
         public string PlayerId => IsSignedIn ? AuthenticationService.Instance.PlayerId : string.Empty;
         public string PlayerName => IsSignedIn ? AuthenticationService.Instance.PlayerName : string.Empty;
+
+        /// <summary>
+        /// Nombre de usuario de la cuenta con credenciales. Vacío si la sesión es anónima:
+        /// el SDK devuelve null en PlayerInfo.Username mientras no haya credenciales.
+        /// </summary>
+        public string Username =>
+            IsSignedIn ? AuthenticationService.Instance.PlayerInfo?.Username ?? string.Empty : string.Empty;
+
+        /// <summary>
+        /// Sesión iniciada pero sin credenciales vinculadas: ese progreso se pierde al desinstalar.
+        /// </summary>
+        public bool IsAnonymous => IsSignedIn && string.IsNullOrEmpty(Username);
 
         private Task _initializationTask;
         private bool _isSigningIn = false;
@@ -207,6 +222,150 @@ namespace Cloud2026.Services
             {
                 Debug.LogError($"[UGSAuthService] Error al cerrar sesión: {ex.Message}");
             }
+        }
+
+        /// <summary>
+        /// Crea una cuenta nueva con usuario y contraseña y deja la sesión iniciada.
+        /// </summary>
+        public Task<bool> SignUpWithUsernamePasswordAsync(string username, string password)
+        {
+            return RunCredentialOperationAsync(
+                "registro",
+                () => AuthenticationService.Instance.SignUpWithUsernamePasswordAsync(username, password),
+                username,
+                isLink: false);
+        }
+
+        /// <summary>
+        /// Inicia sesión en una cuenta existente de usuario y contraseña.
+        /// </summary>
+        public Task<bool> SignInWithUsernamePasswordAsync(string username, string password)
+        {
+            return RunCredentialOperationAsync(
+                "inicio de sesión",
+                () => AuthenticationService.Instance.SignInWithUsernamePasswordAsync(username, password),
+                username,
+                isLink: false);
+        }
+
+        /// <summary>
+        /// Vincula usuario y contraseña a la sesión anónima en curso. El PlayerId no cambia,
+        /// así que el progreso del jugador sobrevive al cambio de dispositivo.
+        /// </summary>
+        public Task<bool> LinkUsernamePasswordAsync(string username, string password)
+        {
+            if (!IsSignedIn)
+            {
+                const string msg = "No hay sesión activa que vincular. Entra como invitado primero.";
+                Debug.LogWarning($"[UGSAuthService] {msg}");
+                OnSignInFailed?.Invoke(msg);
+                return Task.FromResult(false);
+            }
+
+            return RunCredentialOperationAsync(
+                "vinculación",
+                () => AuthenticationService.Instance.AddUsernamePasswordAsync(username, password),
+                username,
+                isLink: true);
+        }
+
+        /// <summary>
+        /// Tronco común de las tres operaciones con credenciales: evita solapamientos, garantiza
+        /// la inicialización, ejecuta la llamada al SDK y traduce los fallos a mensajes de UI.
+        /// </summary>
+        private async Task<bool> RunCredentialOperationAsync(
+            string operationName,
+            Func<Task> operation,
+            string username,
+            bool isLink)
+        {
+            if (_isSigningIn)
+            {
+                Debug.LogWarning($"[UGSAuthService] Hay otra operación de cuenta en curso; se ignora el {operationName}.");
+                return false;
+            }
+
+            if (!IsInitialized)
+            {
+                await InitializeAsync();
+                if (!IsInitialized)
+                {
+                    OnSignInFailed?.Invoke("No se pudo contactar con Unity Gaming Services.");
+                    return false;
+                }
+            }
+
+            _isSigningIn = true;
+
+            try
+            {
+                Debug.Log($"[UGSAuthService] Iniciando {operationName} para el usuario '{username}'...");
+                await operation();
+
+                if (isLink)
+                {
+                    Debug.Log($"[UGSAuthService] Cuenta vinculada como '{username}'. PlayerId conservado: {PlayerId}");
+                    OnAccountLinked?.Invoke(username);
+                }
+                else
+                {
+                    Debug.Log($"[UGSAuthService] {operationName} correcto. PlayerId: {PlayerId}");
+                }
+
+                return true;
+            }
+            catch (AuthenticationException authEx)
+            {
+                string errorMsg = TranslateAuthError(authEx, operationName);
+                Debug.LogError($"[UGSAuthService] {errorMsg} (ErrorCode {authEx.ErrorCode}): {authEx.Message}");
+                OnSignInFailed?.Invoke(errorMsg);
+                return false;
+            }
+            catch (RequestFailedException reqEx)
+            {
+                string errorMsg = $"Error de conexión durante el {operationName} ({reqEx.ErrorCode}): {reqEx.Message}";
+                Debug.LogError($"[UGSAuthService] {errorMsg}");
+                OnSignInFailed?.Invoke(errorMsg);
+                return false;
+            }
+            finally
+            {
+                _isSigningIn = false;
+            }
+        }
+
+        /// <summary>
+        /// Traduce los códigos de AuthenticationErrorCodes a mensajes que el jugador entienda.
+        /// </summary>
+        private static string TranslateAuthError(AuthenticationException ex, string operationName)
+        {
+            if (ex.ErrorCode == AuthenticationErrorCodes.InvalidParameters)
+            {
+                return "Usuario o contraseña no válidos. La contraseña necesita entre 8 y 30 caracteres, " +
+                       "con al menos una mayúscula, una minúscula, un número y un símbolo.";
+            }
+
+            if (ex.ErrorCode == AuthenticationErrorCodes.AccountAlreadyLinked)
+            {
+                return "Ese nombre de usuario ya está en uso por otra cuenta.";
+            }
+
+            if (ex.ErrorCode == AuthenticationErrorCodes.AccountLinkLimitExceeded)
+            {
+                return "Esta cuenta ya tiene credenciales vinculadas.";
+            }
+
+            if (ex.ErrorCode == AuthenticationErrorCodes.ClientInvalidUserState)
+            {
+                return "La sesión no permite esta operación ahora mismo. Cierra sesión e inténtalo de nuevo.";
+            }
+
+            if (ex.ErrorCode == AuthenticationErrorCodes.BannedUser)
+            {
+                return "Esta cuenta está suspendida.";
+            }
+
+            return $"No se pudo completar el {operationName}: {ex.Message}";
         }
 
         private void SubscribeToEvents()
