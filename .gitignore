@@ -112,3 +112,10 @@ InitTestScene*.unity*
 # Fuentes editables del pack de GUI (PSD/SVG, ~667 MB): se rebajan del Asset Store
 Assets/GUIPackCartoon/Sources/
 Assets/GUIPackCartoon/Sources.meta
+
+# Config local de opencode: contiene rutas absolutas de esta maquina
+opencode.json
+
+# Pack del Asset Store: licencia EULA de Unity, no redistribuible en repo publico
+Assets/GUIPackCartoon/
+Assets/GUIPackCartoon.meta
