@@ -53,4 +53,4 @@ que compiló. Requiere que el Editor esté abierto.
 
 ## Agentes
 
-`unity-client` · `cloudcode-backend` · `ugs-config` · `auditor-autoritativo` · `github`
+`unity-client` · `cloudcode-backend` · `ugs-config` · `auditor-autoritativo` · `qa-tester` · `github`
