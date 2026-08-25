@@ -156,8 +156,8 @@
   <Project Path="Unity.InternalAPIEngineBridge.004.csproj" />
   <Project Path="Unity.AppUI.InternalAPIBridge.csproj" />
   <Project Path="Unity.VisualScripting.SettingsProvider.Editor.csproj" />
-  <Project Path="Unity.Services.Core.Scheduler.csproj" />
   <Project Path="Cloud2026.Editor.csproj" />
+  <Project Path="Unity.Services.Core.Scheduler.csproj" />
   <Project Path="Unity.AI.Toolkit.Async.csproj" />
   <Project Path="Unity.RemoteConfig.Editor.csproj" />
   <Project Path="Unity.PlasticSCM.Editor.Entities.csproj" />
