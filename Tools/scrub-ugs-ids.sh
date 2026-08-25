@@ -1,20 +1,16 @@
 #!/bin/sh
-# Filtro 'clean' de git para los archivos que guardan identificadores de UGS.
+# Filtro 'clean' de git para ProjectSettings/ProjectSettings.asset.
 #
 # Vacia los identificadores de Unity Gaming Services antes de que el contenido
 # entre en git. El archivo en disco conserva sus valores, asi que el Editor
 # sigue conectado al proyecto de UGS; lo que se versiona va sin ellos.
 #
-# Archivos a los que se aplica (ver .gitattributes):
-#   ProjectSettings/ProjectSettings.asset                             (YAML)
-#   ProjectSettings/Packages/com.unity.services.core/Settings.json    (JSON)
+# Sobre el identificador de entorno: NO se filtra, se ignora el archivo entero
+# (ver .gitignore). Unity guarda EnvironmentId como Guid, no como cadena, asi que
+# dejarlo vacio rompe la inicializacion del Editor. Y como Unity regenera ese
+# archivo al vincular el proyecto, no versionarlo no le cuesta nada a nadie.
 #
-# EnvironmentName se conserva a proposito: el nombre del entorno es un contrato
-# compartido entre la configuracion, el codigo C# y Cloud Code, y la clase entera
-# necesita el mismo. EnvironmentId apunta al proyecto de una persona concreta.
-#
-# Se activa con:  git config filter.ugs-ids.clean "sh Tools/scrub-ugs-ids.sh"
-# Sin esa configuracion git deja pasar el contenido tal cual, sin fallar.
-sed -E \
-  -e 's/^([[:space:]]*(cloudProjectId|organizationId|projectName):)[^\r]*/\1/' \
-  -e 's/^([[:space:]]*"EnvironmentId"[[:space:]]*:[[:space:]]*)"[^"]*"/\1""/'
+# Se activa con:  sh Tools/setup-git.sh
+# Sin esa configuracion git deja pasar el contenido tal cual, sin fallar; por eso
+# el hook de pre-commit comprueba que este puesto.
+sed -E 's/^([[:space:]]*(cloudProjectId|organizationId|projectName):)[^\r]*/\1/'
