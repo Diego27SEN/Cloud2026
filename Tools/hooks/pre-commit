@@ -1,0 +1,57 @@
+#!/bin/sh
+# Hook pre-commit: impide que los identificadores de Unity Gaming Services
+# entren en el repositorio.
+#
+# Se activa con:                 sh Tools/setup-git.sh
+# Para saltarselo puntualmente:  git commit --no-verify
+#
+# Comprueba dos cosas:
+#   1. Que el filtro 'clean' esta configurado en este clon. Sin el, git deja
+#      pasar el contenido tal cual y sin avisar.
+#   2. Que lo que se va a commitear no trae ningun identificador con valor,
+#      venga del archivo que venga. Esto cubre el caso de un archivo nuevo
+#      que todavia no este declarado en .gitattributes.
+set -e
+
+bloquear() {
+    echo "" >&2
+    echo "  COMMIT BLOQUEADO" >&2
+    echo "" >&2
+    printf '  %s\n' "$@" >&2
+    echo "" >&2
+    exit 1
+}
+
+# 1. El filtro tiene que estar configurado en este clon.
+if [ -z "$(git config --get filter.ugs-ids.clean)" ]; then
+    bloquear \
+        "El filtro que vacia los identificadores de UGS no esta configurado" \
+        "en este clon. Sin el, tu project ID y tu environment ID acabarian" \
+        "en el repositorio compartido." \
+        "" \
+        "Activalo una sola vez con:" \
+        "" \
+        "    sh Tools/setup-git.sh"
+fi
+
+# 2. Nada de identificadores con valor en el contenido que se va a commitear.
+#    'git diff --cached' ya aplica el filtro clean, asi que lo que se ve aqui
+#    es exactamente lo que quedaria guardado en el commit.
+filtrados=$(git diff --cached -U0 --diff-filter=ACMR |
+    grep -E '^\+' |
+    grep -Ev '^\+\+\+' |
+    grep -E '(cloudProjectId|organizationId|projectName)[[:space:]]*:[[:space:]]*[^[:space:]]|"EnvironmentId"[[:space:]]*:[[:space:]]*"[^"]+"' || true)
+
+if [ -n "$filtrados" ]; then
+    bloquear \
+        "Hay identificadores de UGS con valor en lo que ibas a commitear:" \
+        "" \
+        "$(printf '%s' "$filtrados" | sed 's/^/    /')" \
+        "" \
+        "Si el archivo es nuevo, declaralo en .gitattributes con filter=ugs-ids" \
+        "y vuelve a hacer 'git add'. Si el identificador esta pegado a mano en" \
+        "codigo o documentacion, quitalo: no hace falta para que el proyecto" \
+        "funcione."
+fi
+
+exit 0
