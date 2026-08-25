@@ -28,7 +28,8 @@ Assets/Scripts/Services/   Un wrapper por servicio de UGS
 Assets/Scripts/Gameplay/
 Assets/Scripts/UI/
 Assets/Tests/              EditMode / PlayMode
-Assets/CloudCode/          Módulos .js (los descubre la ventana de Deployment)
+Assets/Editor/             Herramientas del Editor (generadores de escena, menús)
+Assets/CloudCode/          Módulos .js y referencias .ccmr (los descubre la ventana de Deployment)
 Assets/UGS/Economy/        .ecs
 Assets/UGS/RemoteConfig/   .rc
 Assets/UGS/Leaderboards/   .lb
@@ -41,6 +42,8 @@ La UI y el gameplay no llaman al SDK de UGS directamente: pasan por `Services/`.
 
 - IDs de UGS (currencies, claves de Remote Config, leaderboards) en `snake_case`. Un ID es un
   contrato entre config, C# y Cloud Code: al renombrar, se actualizan los tres en el mismo cambio.
+- Los IDs de módulo de Cloud Code son la excepción: UGS los deriva del nombre del `.csproj`,
+  así que van en PascalCase (`HelloWorld`).
 - Todo valor ajustable por diseño vive en Remote Config, no incrustado en código.
 - Todo `await` de UGS va en try/catch tipado. Nada de `catch` vacíos.
 - Secretos y service account keys nunca se versionan.

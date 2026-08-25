@@ -1,0 +1,11 @@
+# Salidas de compilación de los módulos de Cloud Code (.NET).
+# El .ccm que se despliega se genera al vuelo desde la ventana de Deployment.
+bin/
+obj/
+*.user
+
+# El .gitignore de la raíz ignora *.sln y *.csproj porque en un proyecto de Unity
+# los genera el Editor. Los de estos módulos NO son generados: son el proyecto de
+# servidor que se despliega, así que hay que versionarlos.
+!*.sln
+!*.csproj
