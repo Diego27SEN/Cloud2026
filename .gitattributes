@@ -172,6 +172,7 @@ LightingData.asset     binary
 
 # Los identificadores de UGS no entran en el repo (ver Tools/scrub-ugs-ids.sh)
 ProjectSettings/ProjectSettings.asset filter=ugs-ids
+ProjectSettings/Packages/com.unity.services.core/Settings.json filter=ugs-ids unity-json
 
 # Los scripts de shell deben mantener LF: con CRLF, sh falla con ": command not found"
 *.sh text eol=lf

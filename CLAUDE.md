@@ -47,6 +47,10 @@ La UI y el gameplay no llaman al SDK de UGS directamente: pasan por `Services/`.
 - Todo valor ajustable por diseño vive en Remote Config, no incrustado en código.
 - Todo `await` de UGS va en try/catch tipado. Nada de `catch` vacíos.
 - Secretos y service account keys nunca se versionan.
+- Los identificadores de UGS (project ID, organization ID, environment ID) los vacía un filtro
+  `clean` de git antes de que entren. Sin configurar, el filtro no falla: deja pasar el contenido
+  tal cual. Cada clon lo activa una vez con
+  `git config filter.ugs-ids.clean "sh Tools/scrub-ugs-ids.sh"`.
 - El código lo leen estudiantes: claridad por encima de astucia.
 
 ## Verificación
