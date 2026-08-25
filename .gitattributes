@@ -176,3 +176,4 @@ ProjectSettings/Packages/com.unity.services.core/Settings.json filter=ugs-ids un
 
 # Los scripts de shell deben mantener LF: con CRLF, sh falla con ": command not found"
 *.sh text eol=lf
+Tools/hooks/* text eol=lf

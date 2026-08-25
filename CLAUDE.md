@@ -48,9 +48,9 @@ La UI y el gameplay no llaman al SDK de UGS directamente: pasan por `Services/`.
 - Todo `await` de UGS va en try/catch tipado. Nada de `catch` vacíos.
 - Secretos y service account keys nunca se versionan.
 - Los identificadores de UGS (project ID, organization ID, environment ID) los vacía un filtro
-  `clean` de git antes de que entren. Sin configurar, el filtro no falla: deja pasar el contenido
-  tal cual. Cada clon lo activa una vez con
-  `git config filter.ugs-ids.clean "sh Tools/scrub-ugs-ids.sh"`.
+  `clean` de git antes de que entren, y un hook de `pre-commit` bloquea el commit si el filtro no
+  está activo o si se cuela un identificador con valor. Ambos viven en el repo pero git no los
+  aplica solo: cada clon los activa una vez con `sh Tools/setup-git.sh`.
 - El código lo leen estudiantes: claridad por encima de astucia.
 
 ## Verificación
