@@ -16,6 +16,9 @@ namespace Cloud2026.Core
         [Header("Servicios")]
         [SerializeField] private UGSAuthService authService;
 
+        [Tooltip("Wrapper de Cloud Code. Necesita sesión iniciada para poder llamar al servidor.")]
+        [SerializeField] private UGSCloudCodeService cloudCodeService;
+
         [Header("Configuración de Arranque")]
         [Tooltip("Si es true, no destruye este GameObject al cargar nuevas escenas.")]
         [SerializeField] private bool persistAcrossScenes = true;
@@ -24,6 +27,8 @@ namespace Cloud2026.Core
         [SerializeField] private bool autoLoginAnonymous = false;
 
         public IAuthService AuthService => authService;
+
+        public ICloudCodeService CloudCodeService => cloudCodeService;
 
         public event Action OnServicesReady;
 
@@ -67,6 +72,15 @@ namespace Cloud2026.Core
                 if (authService == null)
                 {
                     authService = gameObject.AddComponent<UGSAuthService>();
+                }
+            }
+
+            if (cloudCodeService == null)
+            {
+                cloudCodeService = GetComponentInChildren<UGSCloudCodeService>();
+                if (cloudCodeService == null)
+                {
+                    cloudCodeService = gameObject.AddComponent<UGSCloudCodeService>();
                 }
             }
         }
