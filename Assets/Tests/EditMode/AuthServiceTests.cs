@@ -103,6 +103,38 @@ namespace Cloud2026.Tests
                 OnAccountLinked?.Invoke(username);
                 return Task.FromResult(true);
             }
+
+            public Task<bool> SignInWithUnityAsync()
+            {
+                if (ShouldFail)
+                {
+                    OnSignInFailed?.Invoke("Login con Unity rechazado");
+                    return Task.FromResult(false);
+                }
+
+                IsSignedIn = true;
+                PlayerId = SimulatedPlayerId;
+                OnSignedIn?.Invoke(PlayerId);
+                return Task.FromResult(true);
+            }
+
+            public Task<bool> LinkWithUnityAsync()
+            {
+                if (!IsSignedIn)
+                {
+                    OnSignInFailed?.Invoke("No hay sesión que vincular");
+                    return Task.FromResult(false);
+                }
+
+                if (ShouldFail)
+                {
+                    OnSignInFailed?.Invoke("Esa cuenta de Unity ya está vinculada a otro jugador");
+                    return Task.FromResult(false);
+                }
+
+                OnAccountLinked?.Invoke("tu cuenta de Unity");
+                return Task.FromResult(true);
+            }
         }
 
         [Test]
@@ -203,6 +235,51 @@ namespace Cloud2026.Tests
             Assert.IsTrue(auth.IsSignedIn);
             Assert.AreEqual("jugador02", auth.Username);
             Assert.IsFalse(auth.IsAnonymous);
+        }
+
+        [Test]
+        public async Task FakeAuthService_SignInWithUnity_RaisesSignedInEventAndSetsState()
+        {
+            var auth = new FakeAuthService();
+            string receivedPlayerId = null;
+            auth.OnSignedIn += id => receivedPlayerId = id;
+
+            bool result = await auth.SignInWithUnityAsync();
+
+            Assert.IsTrue(result);
+            Assert.IsTrue(auth.IsSignedIn);
+            Assert.AreEqual("test-player-123456", receivedPlayerId);
+        }
+
+        [Test]
+        public async Task FakeAuthService_LinkWithUnity_KeepsPlayerIdAndRaisesAccountLinked()
+        {
+            var auth = new FakeAuthService();
+            await auth.SignInAnonymouslyAsync();
+            string playerIdBeforeLink = auth.PlayerId;
+
+            string linkedLabel = null;
+            auth.OnAccountLinked += label => linkedLabel = label;
+
+            bool result = await auth.LinkWithUnityAsync();
+
+            Assert.IsTrue(result);
+            Assert.IsNotNull(linkedLabel);
+            Assert.AreEqual(playerIdBeforeLink, auth.PlayerId,
+                "Vincular una cuenta de Unity no debe cambiar el PlayerId: el progreso se conserva.");
+        }
+
+        [Test]
+        public async Task FakeAuthService_LinkWithUnityWithoutSession_Fails()
+        {
+            var auth = new FakeAuthService();
+            string error = null;
+            auth.OnSignInFailed += err => error = err;
+
+            bool result = await auth.LinkWithUnityAsync();
+
+            Assert.IsFalse(result);
+            Assert.IsNotNull(error);
         }
     }
 }

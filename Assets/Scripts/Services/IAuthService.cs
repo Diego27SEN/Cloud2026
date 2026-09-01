@@ -49,6 +49,18 @@ namespace Cloud2026.Services
         /// </summary>
         Task<bool> LinkUsernamePasswordAsync(string username, string password);
 
+        /// <summary>
+        /// Abre el navegador del sistema para iniciar sesión con una cuenta de Unity
+        /// (Unity Player Accounts) y completa el login en UGS con ese token.
+        /// </summary>
+        Task<bool> SignInWithUnityAsync();
+
+        /// <summary>
+        /// Vincula una cuenta de Unity a la sesión anónima en curso. Igual que
+        /// <see cref="LinkUsernamePasswordAsync"/>, conserva el PlayerId.
+        /// </summary>
+        Task<bool> LinkWithUnityAsync();
+
         void SignOut(bool clearCredentials = false);
     }
 }
