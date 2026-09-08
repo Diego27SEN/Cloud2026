@@ -37,16 +37,28 @@ namespace Cloud2026.Services
         public string PlayerName => IsSignedIn ? AuthenticationService.Instance.PlayerName : string.Empty;
 
         /// <summary>
-        /// Nombre de usuario de la cuenta con credenciales. Vacío si la sesión es anónima:
-        /// el SDK devuelve null en PlayerInfo.Username mientras no haya credenciales.
+        /// Nombre de usuario de la cuenta con credenciales. Vacío si la sesión es anónima o si
+        /// solo tiene una cuenta de Unity vinculada: el SDK devuelve null en PlayerInfo.Username
+        /// mientras no haya credenciales de usuario/contraseña.
         /// </summary>
         public string Username =>
             IsSignedIn ? AuthenticationService.Instance.PlayerInfo?.Username ?? string.Empty : string.Empty;
 
         /// <summary>
-        /// Sesión iniciada pero sin credenciales vinculadas: ese progreso se pierde al desinstalar.
+        /// PlayerInfo.GetUnityId() solo devuelve algo cuando la sesión tiene una identidad de
+        /// Unity Player Accounts vinculada (por SignInWithUnityAsync o LinkWithUnityAsync).
         /// </summary>
-        public bool IsAnonymous => IsSignedIn && string.IsNullOrEmpty(Username);
+        public bool IsUnityAccountLinked =>
+            IsSignedIn && !string.IsNullOrEmpty(AuthenticationService.Instance.PlayerInfo?.GetUnityId());
+
+        /// <summary>
+        /// Sesión iniciada pero sin ninguna identidad persistente vinculada: ese progreso se
+        /// pierde al desinstalar. Antes de sumar Unity Player Accounts esto solo miraba
+        /// Username, así que un jugador logueado solo con su cuenta de Unity (sin
+        /// usuario/contraseña) se veía como anónimo y le salía el aviso de vincular cuenta
+        /// aunque ya tuviera una identidad real.
+        /// </summary>
+        public bool IsAnonymous => IsSignedIn && string.IsNullOrEmpty(Username) && !IsUnityAccountLinked;
 
         private Task _initializationTask;
         private bool _isSigningIn = false;

@@ -274,9 +274,16 @@ namespace Cloud2026.UI
                     accountStateText.text = "Sesión de invitado: vincula una cuenta para no perder el progreso.";
                     accountStateText.color = ColorAviso;
                 }
-                else
+                else if (!string.IsNullOrEmpty(_authService.Username))
                 {
                     accountStateText.text = $"Cuenta: <color=#FFE600>{_authService.Username}</color>";
+                    accountStateText.color = Color.white;
+                }
+                else
+                {
+                    // No anónimo pero sin Username: la identidad vinculada es una cuenta de
+                    // Unity, no usuario/contraseña.
+                    accountStateText.text = "Cuenta: <color=#FFE600>cuenta de Unity</color>";
                     accountStateText.color = Color.white;
                 }
             }

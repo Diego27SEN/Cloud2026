@@ -28,9 +28,13 @@ namespace Cloud2026.Services
         /// </summary>
         string Username { get; }
 
+        /// <summary>True si la sesión tiene una cuenta de Unity (Player Accounts) vinculada.</summary>
+        bool IsUnityAccountLinked { get; }
+
         /// <summary>
-        /// True si hay sesión iniciada pero sin credenciales vinculadas. Ese progreso se pierde
-        /// al desinstalar el juego o cambiar de dispositivo.
+        /// True si hay sesión iniciada pero sin ninguna identidad persistente vinculada
+        /// (ni usuario/contraseña ni cuenta de Unity). Ese progreso se pierde al desinstalar
+        /// el juego o cambiar de dispositivo.
         /// </summary>
         bool IsAnonymous { get; }
 

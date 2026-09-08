@@ -23,7 +23,8 @@ namespace Cloud2026.Tests
             public string PlayerId { get; set; }
             public string PlayerName { get; set; }
             public string Username { get; set; } = string.Empty;
-            public bool IsAnonymous => IsSignedIn && string.IsNullOrEmpty(Username);
+            public bool IsUnityAccountLinked { get; set; }
+            public bool IsAnonymous => IsSignedIn && string.IsNullOrEmpty(Username) && !IsUnityAccountLinked;
 
             public bool ShouldFail { get; set; }
             public string SimulatedPlayerId { get; set; } = "test-player-123456";
@@ -114,6 +115,7 @@ namespace Cloud2026.Tests
 
                 IsSignedIn = true;
                 PlayerId = SimulatedPlayerId;
+                IsUnityAccountLinked = true;
                 OnSignedIn?.Invoke(PlayerId);
                 return Task.FromResult(true);
             }
@@ -132,6 +134,7 @@ namespace Cloud2026.Tests
                     return Task.FromResult(false);
                 }
 
+                IsUnityAccountLinked = true;
                 OnAccountLinked?.Invoke("tu cuenta de Unity");
                 return Task.FromResult(true);
             }
@@ -249,6 +252,9 @@ namespace Cloud2026.Tests
             Assert.IsTrue(result);
             Assert.IsTrue(auth.IsSignedIn);
             Assert.AreEqual("test-player-123456", receivedPlayerId);
+            Assert.IsTrue(auth.IsUnityAccountLinked);
+            Assert.IsFalse(auth.IsAnonymous,
+                "Entrar solo con una cuenta de Unity (sin usuario/contraseña) no debe verse como invitado.");
         }
 
         [Test]
@@ -265,6 +271,8 @@ namespace Cloud2026.Tests
 
             Assert.IsTrue(result);
             Assert.IsNotNull(linkedLabel);
+            Assert.IsTrue(auth.IsUnityAccountLinked);
+            Assert.IsFalse(auth.IsAnonymous, "Tras vincular una cuenta de Unity, la sesión deja de ser anónima.");
             Assert.AreEqual(playerIdBeforeLink, auth.PlayerId,
                 "Vincular una cuenta de Unity no debe cambiar el PlayerId: el progreso se conserva.");
         }
