@@ -1,5 +1,7 @@
 ﻿<Solution>
+  <Project Path="MCPForUnity.Editor.csproj" />
   <Project Path="Cloud2026.Runtime.csproj" />
+  <Project Path="MCPForUnity.Runtime.csproj" />
   <Project Path="Cloud2026.Editor.csproj" />
   <Project Path="Cloud2026.Tests.csproj" />
 </Solution>

@@ -1,6 +1,10 @@
 {
   "dependencies": {
+<<<<<<< Updated upstream
     "com.coplaydev.unity-mcp": "file:C:/Users/saidc/Downloads/unity-mcp-10.0.0/unity-mcp-10.0.0/MCPForUnity",
+=======
+    "com.coplaydev.unity-mcp": "file:C:/Users/USUARIO/Downloads/unity-mcp-10.0.0/MCPForUnity",
+>>>>>>> Stashed changes
     "com.unity.2d.animation": "13.0.6",
     "com.unity.2d.aseprite": "3.0.2",
     "com.unity.2d.psdimporter": "12.0.2",
