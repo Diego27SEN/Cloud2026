@@ -6,11 +6,23 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/Menu.unity
+    guid: be087a67126f01d448f6664fd69d25a7
+  - enabled: 1
     path: Assets/Scenes/TurnMatch.unity
     guid: b7d1a6fb1eeb5794b89f102bd8f5e0a9
   - enabled: 1
     path: Assets/Scenes/MainFlow.unity
     guid: 83fef999ad9c67741adee4909461bc6d
+  - enabled: 1
+    path: Assets/Scenes/Options_MBOPS.unity
+    guid: 18a42c6ba7bc65044b9e9c09a909a018
+  - enabled: 1
+    path: Assets/Scenes/HowToPlay.unity
+    guid: 0d4119b7952b49f4e9dd17d9d752c883
+  - enabled: 1
+    path: Assets/Scenes/Gameplay_MBOPS.unity
+    guid: 5eb58b2304ba8ca44a0b837fb28ffa2e
   m_configObjects:
     com.unity.dt.app-ui: {fileID: 11400000, guid: 1b1c20d82303e4b5781c3ef50ac1449f, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
