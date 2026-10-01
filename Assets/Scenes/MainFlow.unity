@@ -10963,6 +10963,7 @@ GameObject:
   - component: {fileID: 1897824344}
   - component: {fileID: 1897824343}
   - component: {fileID: 1897824342}
+  - component: {fileID: 1897824348}
   m_Layer: 0
   m_Name: GameBootstrap
   m_TagString: Untagged
@@ -10986,8 +10987,9 @@ MonoBehaviour:
   cloudCodeService: {fileID: 1897824345}
   turnMatchService: {fileID: 1897824344}
   cloudSaveService: {fileID: 1897824343}
+  remoteConfigService: {fileID: 1897824348}
   persistAcrossScenes: 1
-  autoLoginAnonymous: 0
+  autoLoginAnonymous: 1
 --- !u!114 &1897824343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11036,7 +11038,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1000000000000000000000000000003, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Cloud2026.Runtime::Cloud2026.Services.UGSAuthService
-  initializeOnAwake: 1
+  initializeOnAwake: 0
   profileName: 
   environmentName: production
 --- !u!4 &1897824347
@@ -11054,6 +11056,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1897824348
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1897824341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac3006c6aa98f9d4182b188cc4b3bf2c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Cloud2026.Runtime::Cloud2026.UGSRemoteConfigService
 --- !u!1 &1992188251
 GameObject:
   m_ObjectHideFlags: 0
