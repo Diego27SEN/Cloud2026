@@ -24,10 +24,10 @@ namespace Cloud2026
             if (remoteConfigService == null) return;
 
             // Muestra el origen en la esquina (Requisito del paso 6)
-            textoOrigen.text = $"Balance desde: {remoteConfigService.OrigenDeDatos}";
+            textoOrigen.text = $"Balance: {remoteConfigService.OrigenDeDatos}";
 
             // Muestra los Valores Base (aquí se reflejará tu 99)
-            string textoFinal = $"--- VALORES BASE ---\n" +
+            string textoFinal = $" Valores base \n" +
                                 $"Vida Base: {remoteConfigService.VidaBase}\n" +
                                 $"Ataque Base: {remoteConfigService.AtaqueBase}\n\n";
 
@@ -35,7 +35,7 @@ namespace Cloud2026
             var heroe = remoteConfigService.BuscarHeroe(idHeroeAMostrar);
             if (heroe != null)
             {
-                textoFinal += $"--- TABLA JSON ---\n" +
+                textoFinal += $"tabla\n" +
                               $"Unidad: {heroe.id.ToUpper()}\n" +
                               $"Vida: {heroe.vida} | Ataque: {heroe.ataque} | Def: {heroe.defensa}";
             }

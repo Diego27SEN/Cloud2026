@@ -12,34 +12,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 469c24fdb3bd6431b92cc1465bd9166b, type: 3}
   m_Name: RemoteConfigDataStoreAsset
   m_EditorClassIdentifier: Unity.RemoteConfig.Editor::Unity.RemoteConfig.Editor.RemoteConfigDataStore
-  _rsKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"55e4408e-520a-4f7f-986e-f36196e927a2\"\r\n   
-    },\r\n    \"rs\": {\r\n      \"key\": \"Vida_base\",\r\n      \"type\": \"int\",\r\n     
+  _rsKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"c9682445-4b8e-406a-9532-29b1f302e8d1\"\r\n   
+    },\r\n    \"rs\": {\r\n      \"key\": \"vida_base\",\r\n      \"type\": \"int\",\r\n     
     \"value\": 100\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"d18410ba-09b0-4374-bbb6-4a321135b1f5\"\r\n    },\r\n    \"rs\": {\r\n     
-    \"key\": \"Ataque_Base\",\r\n      \"type\": \"int\",\r\n      \"value\": 10\r\n   
-    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"5dc6df00-639b-451b-817f-d60b3a18bbb7\"\r\n   
-    },\r\n    \"rs\": {\r\n      \"key\": \"Defensa_base\",\r\n      \"type\": \"int\",\r\n     
+    \"a4a6689e-e99a-42b8-8a65-4836cc1b6f6a\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"ataque_base\",\r\n      \"type\": \"int\",\r\n      \"value\": 10\r\n   
+    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"204a5620-a337-498a-a127-3c80fc4f1f33\"\r\n   
+    },\r\n    \"rs\": {\r\n      \"key\": \"defensa_base\",\r\n      \"type\": \"int\",\r\n     
     \"value\": 2\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"9fada797-dd32-490d-9832-a7b7a5702329\"\r\n    },\r\n    \"rs\": {\r\n     
-    \"key\": \"Multiplicador_Dificultad\",\r\n      \"type\": \"float\",\r\n     
+    \"50b5aa1a-a853-4d11-a8b0-7764cd71fc9b\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"multiplicador_dificultad\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 1.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"6c7178c9-525d-4f6f-9432-bbb615ed255e\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"840ea909-b1a6-4a1e-9f45-12db53425674\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"tabla_heroes\",\r\n      \"type\": \"json\",\r\n      \"schemaId\":
-    null,\r\n      \"value\": {}\r\n    }\r\n  }\r\n]"
-  _rsLastCachedKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"55e4408e-520a-4f7f-986e-f36196e927a2\"\r\n   
-    },\r\n    \"rs\": {\r\n      \"key\": \"Vida_base\",\r\n      \"type\": \"int\",\r\n     
+    null,\r\n      \"value\": {\r\n        \"heroes\": [\r\n          {\r\n           
+    \"id\": \"guerrero\",\r\n            \"vida\": 140,\r\n            \"ataque\":
+    12,\r\n            \"defensa\": 9,\r\n            \"velocidad\": 8\r\n         
+    },\r\n          {\r\n            \"id\": \"arquera\",\r\n            \"vida\":
+    90,\r\n            \"ataque\": 17,\r\n            \"defensa\": 4,\r\n           
+    \"velocidad\": 9\r\n          },\r\n          {\r\n            \"id\": \"mago\",\r\n           
+    \"vida\": 80,\r\n            \"ataque\": 21,\r\n            \"defensa\": 3,\r\n           
+    \"velocidad\": 7\r\n          }\r\n        ]\r\n      }\r\n    }\r\n  }\r\n]"
+  _rsLastCachedKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"c9682445-4b8e-406a-9532-29b1f302e8d1\"\r\n   
+    },\r\n    \"rs\": {\r\n      \"key\": \"vida_base\",\r\n      \"type\": \"int\",\r\n     
     \"value\": 100\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"d18410ba-09b0-4374-bbb6-4a321135b1f5\"\r\n    },\r\n    \"rs\": {\r\n     
-    \"key\": \"Ataque_Base\",\r\n      \"type\": \"int\",\r\n      \"value\": 10\r\n   
-    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"5dc6df00-639b-451b-817f-d60b3a18bbb7\"\r\n   
-    },\r\n    \"rs\": {\r\n      \"key\": \"Defensa_base\",\r\n      \"type\": \"int\",\r\n     
+    \"a4a6689e-e99a-42b8-8a65-4836cc1b6f6a\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"ataque_base\",\r\n      \"type\": \"int\",\r\n      \"value\": 10\r\n   
+    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"204a5620-a337-498a-a127-3c80fc4f1f33\"\r\n   
+    },\r\n    \"rs\": {\r\n      \"key\": \"defensa_base\",\r\n      \"type\": \"int\",\r\n     
     \"value\": 2\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"9fada797-dd32-490d-9832-a7b7a5702329\"\r\n    },\r\n    \"rs\": {\r\n     
-    \"key\": \"Multiplicador_Dificultad\",\r\n      \"type\": \"float\",\r\n     
+    \"50b5aa1a-a853-4d11-a8b0-7764cd71fc9b\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"multiplicador_dificultad\",\r\n      \"type\": \"float\",\r\n     
     \"value\": 1.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
-    \"6c7178c9-525d-4f6f-9432-bbb615ed255e\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"840ea909-b1a6-4a1e-9f45-12db53425674\"\r\n    },\r\n    \"rs\": {\r\n     
     \"key\": \"tabla_heroes\",\r\n      \"type\": \"json\",\r\n      \"schemaId\":
-    null,\r\n      \"value\": {}\r\n    }\r\n  }\r\n]"
+    null,\r\n      \"value\": {\r\n        \"heroes\": [\r\n          {\r\n           
+    \"id\": \"guerrero\",\r\n            \"vida\": 140,\r\n            \"ataque\":
+    12,\r\n            \"defensa\": 9,\r\n            \"velocidad\": 8\r\n         
+    },\r\n          {\r\n            \"id\": \"arquera\",\r\n            \"vida\":
+    90,\r\n            \"ataque\": 17,\r\n            \"defensa\": 4,\r\n           
+    \"velocidad\": 9\r\n          },\r\n          {\r\n            \"id\": \"mago\",\r\n           
+    \"vida\": 80,\r\n            \"ataque\": 21,\r\n            \"defensa\": 3,\r\n           
+    \"velocidad\": 7\r\n          }\r\n        ]\r\n      }\r\n    }\r\n  }\r\n]"
   _environments: "[\r\n  {\r\n    \"projectId\": \"a7c4144c-d6d3-46b6-97c1-f1157797e3c9\",\r\n   
     \"name\": \"production\",\r\n    \"id\": \"c87202c7-4afe-4138-8f3e-45668fb4f563\",\r\n   
     \"isDefault\": true,\r\n    \"createdAt\": \"2026-08-27T02:39:33Z\",\r\n    \"updatedAt\":
