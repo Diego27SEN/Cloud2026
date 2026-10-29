@@ -19,6 +19,14 @@ namespace Cloud2026.Core
         [Tooltip("Wrapper de Cloud Code. Necesita sesión iniciada para poder llamar al servidor.")]
         [SerializeField] private UGSCloudCodeService cloudCodeService;
 
+        [Tooltip("Cliente del módulo TurnMatch: partidas por turnos con idempotencia.")]
+        [SerializeField] private UGSTurnMatchService turnMatchService;
+
+        [Tooltip("Wrapper de Cloud Save: guarda y carga el perfil del jugador. Necesita sesión iniciada.")]
+        [SerializeField] private UGSCloudSaveService cloudSaveService;
+
+        [SerializeField] private UGSRemoteConfigService remoteConfigService;
+
         [Header("Configuración de Arranque")]
         [Tooltip("Si es true, no destruye este GameObject al cargar nuevas escenas.")]
         [SerializeField] private bool persistAcrossScenes = true;
@@ -29,6 +37,10 @@ namespace Cloud2026.Core
         public IAuthService AuthService => authService;
 
         public ICloudCodeService CloudCodeService => cloudCodeService;
+
+        public ITurnMatchService TurnMatchService => turnMatchService;
+
+        public ICloudSaveService CloudSaveService => cloudSaveService;
 
         public event Action OnServicesReady;
 
@@ -61,28 +73,36 @@ namespace Cloud2026.Core
                 {
                     await authService.SignInAnonymouslyAsync();
                 }
+            
+                if (remoteConfigService != null && authService.IsSignedIn)
+                {
+                    await remoteConfigService.InicializarYDescargar();
+                }
             }
         }
 
         private void EnsureServicesAssigned()
         {
-            if (authService == null)
+            authService = EnsureComponent(authService);
+            cloudCodeService = EnsureComponent(cloudCodeService);
+            turnMatchService = EnsureComponent(turnMatchService);
+            cloudSaveService = EnsureComponent(cloudSaveService);
+            remoteConfigService = EnsureComponent(remoteConfigService);
+        }
+
+        /// <summary>
+        /// Devuelve el servicio ya asignado en el inspector; si falta, lo busca entre
+        /// los hijos y, como último recurso, lo añade a este mismo GameObject.
+        /// </summary>
+        private T EnsureComponent<T>(T current) where T : Component
+        {
+            if (current != null)
             {
-                authService = GetComponentInChildren<UGSAuthService>();
-                if (authService == null)
-                {
-                    authService = gameObject.AddComponent<UGSAuthService>();
-                }
+                return current;
             }
 
-            if (cloudCodeService == null)
-            {
-                cloudCodeService = GetComponentInChildren<UGSCloudCodeService>();
-                if (cloudCodeService == null)
-                {
-                    cloudCodeService = gameObject.AddComponent<UGSCloudCodeService>();
-                }
-            }
+            var found = GetComponentInChildren<T>();
+            return found != null ? found : gameObject.AddComponent<T>();
         }
     }
 }

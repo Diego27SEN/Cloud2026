@@ -5,10 +5,13 @@
         "Unity.Services.Core",
         "Unity.Services.Core.Environments",
         "Unity.Services.Authentication",
+        "Unity.Services.Authentication.PlayerAccounts",
         "Unity.Services.CloudCode",
+        "Unity.Services.CloudSave",
         "Unity.InputSystem",
         "UnityEngine.UI",
-        "Unity.TextMeshPro"
+        "Unity.TextMeshPro",
+        "Unity.Services.RemoteConfig"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

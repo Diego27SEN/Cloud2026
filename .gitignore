@@ -119,3 +119,7 @@ opencode.json
 # Pack del Asset Store: licencia EULA de Unity, no redistribuible en repo publico
 Assets/GUIPackCartoon/
 Assets/GUIPackCartoon.meta
+
+# Unity regenera este archivo al vincular el proyecto con UGS, y su EnvironmentId
+# es un Guid: versionarlo vacio rompe la inicializacion del Editor.
+/[Pp]roject[Ss]ettings/Packages/com.unity.services.core/Settings.json

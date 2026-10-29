@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 469c24fdb3bd6431b92cc1465bd9166b, type: 3}
+  m_Name: RemoteConfigDataStoreAsset
+  m_EditorClassIdentifier: Unity.RemoteConfig.Editor::Unity.RemoteConfig.Editor.RemoteConfigDataStore
+  _rsKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"34970f04-15da-4b6e-83d1-291971883d3b\"\r\n   
+    },\r\n    \"rs\": {\r\n      \"key\": \"vida_base\",\r\n      \"type\": \"int\",\r\n     
+    \"value\": 100\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"a4184a39-1a50-41be-afb2-0647e7b4af61\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"ataque_base\",\r\n      \"type\": \"int\",\r\n      \"value\": 10\r\n   
+    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"1098a29b-a9af-4dae-a4c1-127df242cab0\"\r\n   
+    },\r\n    \"rs\": {\r\n      \"key\": \"defensa_base\",\r\n      \"type\": \"int\",\r\n     
+    \"value\": 2\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"fe615fff-8831-4b39-ac39-aedb0c3c47f2\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"multiplicador_dificultad\",\r\n      \"type\": \"float\",\r\n     
+    \"value\": 1.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"15e61d7e-f5fd-4081-8eba-fa7f4afdfbe4\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"tabla_heroes\",\r\n      \"type\": \"json\",\r\n      \"schemaId\":
+    null,\r\n      \"value\": {\r\n        \"heroes\": [\r\n          {\r\n           
+    \"id\": \"guerrero\",\r\n            \"vida\": 140,\r\n            \"ataque\":
+    12,\r\n            \"defensa\": 9,\r\n            \"velocidad\": 8\r\n         
+    },\r\n          {\r\n            \"id\": \"arquera\",\r\n            \"vida\":
+    90,\r\n            \"ataque\": 17,\r\n            \"defensa\": 4,\r\n           
+    \"velocidad\": 9\r\n          },\r\n          {\r\n            \"id\": \"mago\",\r\n           
+    \"vida\": 80,\r\n            \"ataque\": 21,\r\n            \"defensa\": 3,\r\n           
+    \"velocidad\": 7\r\n          }\r\n        ]\r\n      }\r\n    }\r\n  }\r\n]"
+  _rsLastCachedKeyList: "[\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"34970f04-15da-4b6e-83d1-291971883d3b\"\r\n   
+    },\r\n    \"rs\": {\r\n      \"key\": \"vida_base\",\r\n      \"type\": \"int\",\r\n     
+    \"value\": 100\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"a4184a39-1a50-41be-afb2-0647e7b4af61\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"ataque_base\",\r\n      \"type\": \"int\",\r\n      \"value\": 10\r\n   
+    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\": \"1098a29b-a9af-4dae-a4c1-127df242cab0\"\r\n   
+    },\r\n    \"rs\": {\r\n      \"key\": \"defensa_base\",\r\n      \"type\": \"int\",\r\n     
+    \"value\": 2\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"fe615fff-8831-4b39-ac39-aedb0c3c47f2\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"multiplicador_dificultad\",\r\n      \"type\": \"float\",\r\n     
+    \"value\": 1.0\r\n    }\r\n  },\r\n  {\r\n    \"metadata\": {\r\n      \"entityId\":
+    \"15e61d7e-f5fd-4081-8eba-fa7f4afdfbe4\"\r\n    },\r\n    \"rs\": {\r\n     
+    \"key\": \"tabla_heroes\",\r\n      \"type\": \"json\",\r\n      \"schemaId\":
+    null,\r\n      \"value\": {\r\n        \"heroes\": [\r\n          {\r\n           
+    \"id\": \"guerrero\",\r\n            \"vida\": 140,\r\n            \"ataque\":
+    12,\r\n            \"defensa\": 9,\r\n            \"velocidad\": 8\r\n         
+    },\r\n          {\r\n            \"id\": \"arquera\",\r\n            \"vida\":
+    90,\r\n            \"ataque\": 17,\r\n            \"defensa\": 4,\r\n           
+    \"velocidad\": 9\r\n          },\r\n          {\r\n            \"id\": \"mago\",\r\n           
+    \"vida\": 80,\r\n            \"ataque\": 21,\r\n            \"defensa\": 3,\r\n           
+    \"velocidad\": 7\r\n          }\r\n        ]\r\n      }\r\n    }\r\n  }\r\n]"
+  _environments: "[\r\n  {\r\n    \"projectId\": \"a7c4144c-d6d3-46b6-97c1-f1157797e3c9\",\r\n   
+    \"name\": \"production\",\r\n    \"id\": \"c87202c7-4afe-4138-8f3e-45668fb4f563\",\r\n   
+    \"isDefault\": true,\r\n    \"createdAt\": \"2026-08-27T02:39:33Z\",\r\n    \"updatedAt\":
+    \"2026-08-27T02:39:33Z\"\r\n  },\r\n  {\r\n    \"projectId\": \"a7c4144c-d6d3-46b6-97c1-f1157797e3c9\",\r\n   
+    \"name\": \"development\",\r\n    \"id\": \"6191cc20-0422-4f63-9a1e-47b3941dfba7\",\r\n   
+    \"isDefault\": false,\r\n    \"createdAt\": \"2026-09-01T21:35:05Z\",\r\n   
+    \"updatedAt\": \"2026-09-01T21:35:05Z\"\r\n  },\r\n  {\r\n    \"projectId\":
+    \"a7c4144c-d6d3-46b6-97c1-f1157797e3c9\",\r\n    \"name\": \"testing\",\r\n   
+    \"id\": \"ed695c0b-eee6-4c10-a2db-90a3de660aac\",\r\n    \"isDefault\": false,\r\n   
+    \"createdAt\": \"2026-09-01T21:30:53Z\",\r\n    \"updatedAt\": \"2026-09-01T21:30:53Z\"\r\n 
+    }\r\n]"
