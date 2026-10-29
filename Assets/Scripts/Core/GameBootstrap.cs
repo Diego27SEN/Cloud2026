@@ -26,6 +26,8 @@ namespace Cloud2026.Core
         [SerializeField] private UGSCloudSaveService cloudSaveService;
 
         [SerializeField] private UGSRemoteConfigService remoteConfigService;
+        [SerializeField] private UGSEconomiaService economiaService;
+
 
         [Header("Configuración de Arranque")]
         [Tooltip("Si es true, no destruye este GameObject al cargar nuevas escenas.")]
@@ -78,6 +80,11 @@ namespace Cloud2026.Core
                 {
                     await remoteConfigService.InicializarYDescargar();
                 }
+
+                if (economiaService != null && authService.IsSignedIn)
+                {
+                    await economiaService.CargarEconomia();
+                }
             }
         }
 
@@ -88,6 +95,7 @@ namespace Cloud2026.Core
             turnMatchService = EnsureComponent(turnMatchService);
             cloudSaveService = EnsureComponent(cloudSaveService);
             remoteConfigService = EnsureComponent(remoteConfigService);
+            economiaService = EnsureComponent(economiaService);
         }
 
         /// <summary>
